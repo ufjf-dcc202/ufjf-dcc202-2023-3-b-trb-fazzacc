@@ -58,3 +58,13 @@ body, html {
   .dice-box{
     margin-top: 60px;
   }
+
+  .sorted-number{
+    color: white;
+    text-align: center;
+    vertical-align: center;
+    margin:0px;
+    margin-top: 7px;
+    width: 50px;
+    font-size: 30px;
+  }
