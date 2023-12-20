@@ -234,9 +234,11 @@ function atualizaTabuleiroUsuario(){
                     </div>*/
             //linha coluna jogador
             var id = "box" + j + k + "0";
-            document.getElementById(id).innerHTML =  '<p class="sorted-number">' +  jogo.jogadores[0].tabuleiro[j][k] + '</p>';
+            if(jogo.jogadores[0].tabuleiro[j][k] != 0)
+                document.getElementById(id).innerHTML =  '<p class="sorted-number">' +  jogo.jogadores[0].tabuleiro[j][k] + '</p>';
             var id = "box" + j + k + "1";
-            document.getElementById(id).innerHTML =  '<p class="sorted-number">' +  jogo.jogadores[1].tabuleiro[j][k] + '</p>';
+            if(jogo.jogadores[1].tabuleiro[j][k] != 0)
+                document.getElementById(id).innerHTML =  '<p class="sorted-number">' +  jogo.jogadores[1].tabuleiro[j][k] + '</p>';
         }
     }
 
