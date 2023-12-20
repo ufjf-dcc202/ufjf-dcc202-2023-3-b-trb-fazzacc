@@ -1,0 +1,60 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    background-color: black;
+  }
+
+  h1{
+    color: rgb(110, 4, 4);
+    padding-top: 20px;
+    padding-left: 20px;
+    text-decoration: underline;
+  }
+
+  .container {
+    display: flex;
+    height: 100%;
+  }
+  
+  .area {
+    flex: 1;
+    box-sizing: border-box;
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+  
+  .player-area{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+  }
+  
+  .subarea {
+    flex: 1;
+    border: 3px solid rgb(110, 4, 4);
+    background-color: rgb(29, 26, 26);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+  }
+
+  .box {
+    width: 50px;
+    height: 50px;
+    background-color: #140f0f; 
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+  .dice-box{
+    margin-top: 60px;
+  }
