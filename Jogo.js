@@ -224,6 +224,22 @@ function atualizaTabuleiroUsuario(){
         document.getElementById(id0).innerHTML = jogo.jogadores[0].pontuacao[i];
     }
 
+    for(var j=0;j>3;j++){
+        for(var k =0;k<3;k++){
+            /*
+            <div class="row">
+                      <div class="box coluna01" id="box001"></div>
+                      <div class="box coluna11" id="box011"></div>
+                      <div class="box coluna21" id="box021"></div>
+                    </div>*/
+            //linha coluna jogador
+            var id = "box" + j + k + "0";
+            document.getElementById(id).innerHTML =  '<p class="sorted-number">' +  jogo.jogadores[0].tabuleiro[j][k] + '</p>';
+            var id = "box" + j + k + "1";
+            document.getElementById(id).innerHTML =  '<p class="sorted-number">' +  jogo.jogadores[1].tabuleiro[j][k] + '</p>';
+        }
+    }
+
 }
 
 function calcularPontuacao(id) {
