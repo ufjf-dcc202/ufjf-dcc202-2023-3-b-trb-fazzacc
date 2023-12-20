@@ -9,6 +9,7 @@
 </head>
 <body>
   <main>
+    <button id="novoJogoBtn" type="button">Novo Jogo</button>
       <h1>ESBUGALHADO</h1>
         <div class="container">
           <div class="area player-area">
@@ -17,41 +18,42 @@
                 <div class="subarea dice-box">
                   <div id="player1box" class="box"></div>
                 </div>
+                <button id="sorteio-1-btn" class="sorteio-btn" hidden>Sortear dado</button>
               </div>
             </div>
             <div class="area">
                 <div class="subarea">
                     <div id="coluna01" class="row">
-                      <div class="box"></div>
-                      <div class="box"></div>
-                      <div class="box"></div>
+                      <div class="box box001"></div>
+                      <div class="box box011"></div>
+                      <div class="box box021"></div>
                     </div>
                     <div id="coluna11" class="row">
-                      <div class="box"></div>
-                      <div class="box"></div>
-                      <div class="box"></div>
+                      <div class="box box101"></div>
+                      <div class="box box111"></div>
+                      <div class="box box121"></div>
                     </div>
                     <div id="coluna21" class="row">
-                      <div class="box"></div>
-                      <div class="box"></div>
-                      <div class="box"></div>
+                      <div class="box box201"></div>
+                      <div class="box box211"></div>
+                      <div class="box box221"></div>
                     </div>
                   </div>
                   <div class="subarea">
                     <div id="coluna00" class="row">
-                      <div class="box"></div>
-                      <div class="box"></div>
-                      <div class="box"></div>
+                      <div class="box box002"></div>
+                      <div class="box box012"></div>
+                      <div class="box box022"></div>
                     </div>
                     <div id="coluna10" class="row">
-                      <div class="box"></div>
-                      <div class="box"></div>
-                      <div class="box"></div>
+                      <div class="box box102"></div>
+                      <div class="box box112"></div>
+                      <div class="box box122"></div>
                     </div>
                     <div id="coluna20" class="row">
-                      <div class="box"></div>
-                      <div class="box"></div>
-                      <div class="box"></div>
+                      <div class="box box202"></div>
+                      <div class="box box212"></div>
+                      <div class="box box222"></div>
                     </div>
                   </div>
             </div>
@@ -61,11 +63,13 @@
                 <div class="subarea dice-box" style="margin-top: 40px;">
                   <div id="player0box"class="box"></div>
                 </div>
+                <button id="sorteio-0-btn" class="sorteio-btn" hidden>Sortear dado</button>
               </div>
             </div>
           </div>
 
     </main>
     <script src="Jogo.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>

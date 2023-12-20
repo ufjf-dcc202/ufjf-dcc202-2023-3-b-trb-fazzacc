@@ -14,15 +14,27 @@ const jogo = {
     'turno': 0
 }
 
+document.getElementById('novoJogoBtn').addEventListener('click', formatarJogo);
+document.getElementById('sorteio-0-btn').addEventListener('click', iniciarRodada);
+document.getElementById('sorteio-1-btn').addEventListener('click', iniciarRodada);
 
 function rodar() {
     iniciarJogo();
     iniciarRodada();
 }
 
+function formatarJogo(){
+    jogo.turno = 0;
+    iniciarJogo();
+}
+
 function iniciarJogo() {
     // Iniciar os tabuleiros
     for(i=0;i<3;i++){
+
+        jogo.jogadores[0].tabuleiro[i] = [];
+        jogo.jogadores[1].tabuleiro[i] = [];
+        
         for(j=0;j<3;j++){
             jogo.jogadores[0].tabuleiro[i][j] = 0;
             jogo.jogadores[1].tabuleiro[i][j] = 0;
@@ -30,17 +42,29 @@ function iniciarJogo() {
         jogo.jogadores[0].pontuacao[i] = 0;
         jogo.jogadores[1].pontuacao[i] = 0;
     }
-    // Definir quem vai primeiro
-    iniciarRodada();
+
+    passarAVez();
+}
+
+function passarAVez(){
+    if(jogo.turno)
+        jogo.turno = 0;
+    else
+        jogo.turno = 1;
+    let sorteioBtnId = 'sorteio-' + jogo.turno + '-btn';
+    //tornar o botão disponivel para o jogador certo
+    let btnSorteio = document.getElementById(sorteioBtnId);
+    btnSorteio.removeAttribute('hidden');
 }
 
 function iniciarRodada () {
-
     let valorSorteado = Math.floor((Math.random() * 6) + 1);
     let idBoxJogador = "player" + jogo.turno + "box";
     var boxJogador = document.getElementById(idBoxJogador);
     boxJogador.innerHTML = '<p class="sorted-number">' + valorSorteado + '</p>';
-    console.log(valorSorteado);
+    //escolher coluna
+    //fazer jogada
+    
 }
 
 //id > funcao passar a coluna como parametro
@@ -83,3 +107,4 @@ function calcularPontuacao(id) {
     return total;
 }
 
+// export { iniciarJogo, formatarJogo };

@@ -68,3 +68,36 @@ body, html {
     width: 50px;
     font-size: 30px;
   }
+
+  #novoJogoBtn{
+    float:right;
+    line-height: 40px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: 100px;
+    font-size: 20px;
+    /* font-weight: bold; */
+    background-color: rgb(110, 4, 4);
+    color:white;
+    border:none;
+    border-radius: 8px;
+  }
+
+  #novoJogoBtn:hover{
+    background-color: rgb(131, 37, 37);
+    cursor: pointer;
+  }
+
+  .sorteio-btn{
+    margin-left: 14px;
+    padding: 8px;
+    color:black;
+    background-color: lightgrey;
+    line-height: 20px;
+    font-size: 16px;
+    border-radius: 4px;
+  }
+
+  .sorteio-btn:hover{
+    background-color: rgb(88, 83, 83);
+  }
