@@ -28,10 +28,6 @@ document.getElementById('button-right').addEventListener('click', function(){
 });
 document.getElementById('button-select').addEventListener('click',fazerJogada);
 
-function rodar() {
-    iniciarJogo();
-    iniciarRodada();
-}
 
 function formatarJogo(){
     jogo.turno = 0;
@@ -57,10 +53,6 @@ function iniciarJogo(){
 }
 
 function alteraBtn(){
-    // if(jogo.turno)
-    //     jogo.turno = 0;
-    // else
-    //     jogo.turno = 1;
     let sorteioBtnId = 'sorteio-' + jogo.turno + '-btn';
     let btnSorteio = document.getElementById(sorteioBtnId);
     if(btnSorteio.hasAttribute('hidden'))
@@ -136,17 +128,31 @@ function fazerJogada() {
     var coluna = jogo.colNumb;
     limparColuna(coluna);
     document.getElementById("col-buttons").setAttribute('hidden', 'true');
-    // atualiza os valores do tabuleiro
+    let idBoxJogador = "player" + jogo.turno + "box";
+    var boxJogador = document.getElementById(idBoxJogador);
+    boxJogador.innerHTML = '';
+    // atualiza tabuleiro
     // Atualiza tabuleiro de adversário
     // Ao fim, calcula pontuacao
     // Verifica fim de jogo
-    if(verificarFimJogo())
-        return;
-    // Muda vez -  mudar o turno e chamar iniciar Rodada
-    if(jogo.turno == 0)
+    if(verificarFimJogo()){
+        alert("FIM DE JOGO!");
+    }
+    else{
+        passarAVez();
+    }
+}
+
+function passarAVez(){
+    //////refazer as alteraçoes para preparar pro próximo jogador
+    //////e chamar iniciaRodada
+    if(jogo.turno == 0){
         jogo.turno = 1;
-    else
+    }
+    else{
         jogo.turno = 0;
+    }
+    alteraBtn();
 }
 
 function verificarFimJogo() {
