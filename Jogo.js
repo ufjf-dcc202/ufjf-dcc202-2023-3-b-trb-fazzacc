@@ -11,12 +11,22 @@ const jogo = {
             pontuacao: []
         }
     ],
-    'turno': 0
+    'turno': 0,
+    'colNumb' : -1
 }
 
 document.getElementById('novoJogoBtn').addEventListener('click', formatarJogo);
+
 document.getElementById('sorteio-0-btn').addEventListener('click', iniciarRodada);
 document.getElementById('sorteio-1-btn').addEventListener('click', iniciarRodada);
+
+document.getElementById('button-left').addEventListener('click', function(){~
+    alteraColuna('e');
+});
+document.getElementById('button-right').addEventListener('click', function(){
+    alteraColuna('d');
+});
+document.getElementById('button-select').addEventListener('click',fazerJogada);
 
 function rodar() {
     iniciarJogo();
@@ -25,11 +35,11 @@ function rodar() {
 
 function formatarJogo(){
     jogo.turno = 0;
+    jogo.colNumb = -1;
     iniciarJogo();
 }
 
-function iniciarJogo() {
-    // Iniciar os tabuleiros
+function iniciarJogo(){
     for(i=0;i<3;i++){
 
         jogo.jogadores[0].tabuleiro[i] = [];
@@ -43,18 +53,53 @@ function iniciarJogo() {
         jogo.jogadores[1].pontuacao[i] = 0;
     }
 
-    passarAVez();
+    alteraBtn();
 }
 
-function passarAVez(){
-    if(jogo.turno)
-        jogo.turno = 0;
-    else
-        jogo.turno = 1;
+function alteraBtn(){
+    // if(jogo.turno)
+    //     jogo.turno = 0;
+    // else
+    //     jogo.turno = 1;
     let sorteioBtnId = 'sorteio-' + jogo.turno + '-btn';
-    //tornar o botão disponivel para o jogador certo
     let btnSorteio = document.getElementById(sorteioBtnId);
-    btnSorteio.removeAttribute('hidden');
+    if(btnSorteio.hasAttribute('hidden'))
+        btnSorteio.removeAttribute('hidden');  
+    else
+        btnSorteio.setAttribute('hidden', 'true');
+}
+
+function alteraColuna(sentido){
+
+
+    var col = jogo.colNumb;
+
+    if(col == 0){
+        if(sentido === 'd'){
+            limparColuna(col);
+            jogo.colNumb = 1;
+            escolherColuna(jogo.colNumb);
+        }
+    }
+    if(col == 1){
+        if(sentido === 'e'){
+            limparColuna(col);
+            jogo.colNumb = 0;
+            escolherColuna(jogo.colNumb);
+        }
+        if(sentido === 'd'){
+            limparColuna(col);
+            jogo.colNumb = 2;
+            escolherColuna(jogo.colNumb);
+        }
+    }
+    if(col == 2){
+        if(sentido === 'e'){
+            limparColuna(col);
+            jogo.colNumb = 1;
+            escolherColuna(jogo.colNumb);
+        }
+    }
 }
 
 function iniciarRodada () {
@@ -62,14 +107,35 @@ function iniciarRodada () {
     let idBoxJogador = "player" + jogo.turno + "box";
     var boxJogador = document.getElementById(idBoxJogador);
     boxJogador.innerHTML = '<p class="sorted-number">' + valorSorteado + '</p>';
-    //escolher coluna
-    //fazer jogada
+    alteraBtn();
+    document.getElementById("col-buttons").removeAttribute('hidden');
+    jogo.colNumb = 0;
+    escolherColuna(jogo.colNumb);  
+}
+
+function escolherColuna(col){
+    let colClassName = "coluna" + col + jogo.turno;
+    var coluna = document.getElementsByClassName(colClassName);
+    for (var i = 0; i < coluna.length; i++) {
+        coluna[i].style.border = '3px solid red';
+    }
     
 }
 
-//id > funcao passar a coluna como parametro
+function limparColuna(col){
+    let colClassName = "coluna" + col + jogo.turno;
+    var coluna = document.getElementsByClassName(colClassName);
+    for (var i = 0; i < coluna.length; i++) {
+        coluna[i].style.border = 'none';
+    }
+    
+}
 
-function fazerJogada(coluna) {
+
+function fazerJogada() {
+    var coluna = jogo.colNumb;
+    limparColuna(coluna);
+    document.getElementById("col-buttons").setAttribute('hidden', 'true');
     // atualiza os valores do tabuleiro
     // Atualiza tabuleiro de adversário
     // Ao fim, calcula pontuacao

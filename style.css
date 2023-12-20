@@ -101,3 +101,31 @@ body, html {
   .sorteio-btn:hover{
     background-color: rgb(88, 83, 83);
   }
+
+  .addBordaColuna{
+    background-color: white;
+  }
+
+  #col-buttons{
+    margin-bottom: 16px;
+    margin-left: 8px;
+  }
+
+  .button-left{
+    color: red;
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  .button-right{
+    color: blue;
+    font-weight: bold;
+    font-size: 20px;
+    margin-right: 36px;
+  }
+
+  .button-select{
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 24px;
+  }
