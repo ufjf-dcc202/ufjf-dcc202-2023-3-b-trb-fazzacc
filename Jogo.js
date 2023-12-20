@@ -50,6 +50,7 @@ function formatarJogo(){
 
 function iniciarJogo(){
     formatarJogo();
+    atualizaTabuleiroUsuario();
     alteraBtn();
 }
 
@@ -192,7 +193,6 @@ function atualizaJogo () {
         player2 = 1;
     }
 
-    //atualiza os tabuleiros
     for(var i=0;i<3;i++){
         if(jogo.jogadores[jogo.turno].tabuleiro[i][jogo.colNumb] == 0){
             jogo.jogadores[jogo.turno].tabuleiro[i][jogo.colNumb] = jogo.valor;
@@ -210,10 +210,21 @@ function atualizaJogo () {
         }
     }
 
+    atualizaTabuleiroUsuario();
+
     jogo.jogadores[0].total = calcularPontuacao(0);
     jogo.jogadores[1].total = calcularPontuacao(1);
 }
 
+function atualizaTabuleiroUsuario(){
+    for(var i=0;i<3;i++){
+        let id1 = "soma" + i + '1';
+        let id0 = "soma" + i + '0';
+        document.getElementById(id1).innerHTML = jogo.jogadores[1].pontuacao[i];
+        document.getElementById(id0).innerHTML = jogo.jogadores[0].pontuacao[i];
+    }
+
+}
 
 function calcularPontuacao(id) {
     let total = 0;
