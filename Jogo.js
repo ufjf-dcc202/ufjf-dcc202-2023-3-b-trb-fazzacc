@@ -214,10 +214,10 @@ function atualizaJogo () {
         }
     }
 
-    atualizaTabuleiroUsuario();
-
+    
     jogo.jogadores[0].total = calcularPontuacao(0);
     jogo.jogadores[1].total = calcularPontuacao(1);
+    atualizaTabuleiroUsuario();
 }
 
 function atualizaTabuleiroUsuario(){
@@ -244,9 +244,6 @@ function atualizaTabuleiroUsuario(){
 function calcularPontuacao(id) {
     let total = 0;
     let soma = 0;
-    for(var i = 0; i < 3; i++){
-
-    }
 
     for(var i=0;i<3;i++){ // coluna
         for(var k=0; k<3;k++){ // 
