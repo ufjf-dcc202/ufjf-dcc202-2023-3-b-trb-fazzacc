@@ -176,7 +176,7 @@ function verificarFimJogo() {
 
     for(var i=0;i<3;i++){
         for(var j=0;j<3;j++){
-            if(jogo.jogadores[1].tabuleiro[i][j] == 0){
+            if(jogo.jogadores[1].tabuleiro[i][j] != 0){
                 preenchido++;
             }
         }
