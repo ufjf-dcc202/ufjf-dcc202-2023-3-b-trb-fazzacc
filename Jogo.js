@@ -240,7 +240,7 @@ function atualizaJogo () {
             }
             atualizaTabuleiroUsuario();
 
-            for(var k=0;k<3;k++){
+            for(var k=0;k<2;k++){
                 if(jogo.jogadores[player2].tabuleiro[k][jogo.colNumb] == 0 && jogo.jogadores[player2].tabuleiro[k+1][jogo.colNumb] != 0){
                     jogo.jogadores[player2].tabuleiro[k][jogo.colNumb] = jogo.jogadores[player2].tabuleiro[k+1][jogo.colNumb];
                     jogo.jogadores[player2].tabuleiro[k+1][jogo.colNumb] = 0;
