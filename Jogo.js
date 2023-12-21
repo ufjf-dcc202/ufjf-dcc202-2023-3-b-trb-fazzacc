@@ -57,10 +57,16 @@ function iniciarJogo(){
 function alteraBtn(){
     let sorteioBtnId = 'sorteio-' + jogo.turno + '-btn';
     let btnSorteio = document.getElementById(sorteioBtnId);
-    if(btnSorteio.hasAttribute('hidden'))
-        btnSorteio.removeAttribute('hidden');  
-    else
-        btnSorteio.setAttribute('hidden', 'true');
+    if(jogo.turno == 1){
+        if(btnSorteio.hasAttribute('hidden'))
+            btnSorteio.removeAttribute('hidden');  
+        else
+            btnSorteio.setAttribute('hidden', 'true');
+    }
+    if(jogo.turno == 0){
+        alert("vez do bot");
+        rodadaBot();
+    }
 }
 
 function alteraColuna(sentido){
@@ -106,6 +112,20 @@ function iniciarRodada () {
     escolherColuna(jogo.colNumb);  
 }
 
+function rodadaBot(){
+    jogo.valor = Math.floor((Math.random() * 6) + 1);
+    let idBoxJogador = "player0box";
+    var boxJogador = document.getElementById(idBoxJogador);
+    boxJogador.innerHTML = '<p class="sorted-number">' +  jogo.valor + '</p>';
+    // alteraBtn();
+    // document.getElementById("col-buttons").removeAttribute('hidden');
+    jogo.colNumb = Math.floor((Math.random() * 3) + 1);
+    while(verificaColunaCheia()){
+        jogo.colNumb = Math.floor((Math.random() * 3) + 1);
+    }
+    fazerJogada();
+}
+
 function escolherColuna(col){
     let colClassName = "coluna" + col + jogo.turno;
     var coluna = document.getElementsByClassName(colClassName);
@@ -124,26 +144,38 @@ function limparColuna(col){
     
 }
 
+function verificaColunaCheia(){
+    var coluna = jogo.colNumb;
+    var player = jogo.turno;
+    for(var i=0;i<3;i++){
+        if(jogo.jogadores[player].tabuleiro[i][coluna] == 0){
+            return false;
+        }
+    }
+    return true;
+}
 
 function fazerJogada() {
     var coluna = jogo.colNumb;
-    limparColuna(coluna);
-    document.getElementById("col-buttons").setAttribute('hidden', 'true');
-    let idBoxJogador = "player" + jogo.turno + "box";
-    var boxJogador = document.getElementById(idBoxJogador);
-    boxJogador.innerHTML = '';
-    atualizaJogo();
-    if(verificarFimJogo()){
-        if(jogo.jogadores[0].total > jogo.jogadores[1].total){
-            alert("FIM DE JOGO!\n O Jogador 0 ganhou com " + jogo.jogadores[0].total + "pontos!");
+    if(!verificaColunaCheia()){
+        limparColuna(coluna);
+        document.getElementById("col-buttons").setAttribute('hidden', 'true');
+        let idBoxJogador = "player" + jogo.turno + "box";
+        var boxJogador = document.getElementById(idBoxJogador);
+        boxJogador.innerHTML = '';
+        atualizaJogo();
+        if(verificarFimJogo()){
+            if(jogo.jogadores[0].total > jogo.jogadores[1].total){
+                alert("FIM DE JOGO!\n O Jogador 0 ganhou com " + jogo.jogadores[0].total + "pontos!");
+            }
+            else{
+                alert("FIM DE JOGO!\n 1 Jogador 0 ganhou com " + jogo.jogadores[1].total + "pontos!");
+            }
+            formatarJogo();
         }
         else{
-            alert("FIM DE JOGO!\n 1 Jogador 0 ganhou com " + jogo.jogadores[1].total + "pontos!");
+            passarAVez();
         }
-        formatarJogo();
-    }
-    else{
-        passarAVez();
     }
 }
 
