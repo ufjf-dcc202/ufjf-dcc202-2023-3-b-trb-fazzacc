@@ -124,26 +124,38 @@ function limparColuna(col){
     
 }
 
+function verificaColunaCheia(){
+    var coluna = jogo.colNumb;
+    var player = jogo.turno;
+    for(var i=0;i<3;i++){
+        if(jogo.jogadores[player].tabuleiro[i][coluna] == 0){
+            return false;
+        }
+    }
+    return true;
+}
 
 function fazerJogada() {
     var coluna = jogo.colNumb;
-    limparColuna(coluna);
-    document.getElementById("col-buttons").setAttribute('hidden', 'true');
-    let idBoxJogador = "player" + jogo.turno + "box";
-    var boxJogador = document.getElementById(idBoxJogador);
-    boxJogador.innerHTML = '';
-    atualizaJogo();
-    if(verificarFimJogo()){
-        if(jogo.jogadores[0].total > jogo.jogadores[1].total){
-            alert("FIM DE JOGO!\n O Jogador 0 ganhou com " + jogo.jogadores[0].total + "pontos!");
+    if(!verificaColunaCheia()){
+        limparColuna(coluna);
+        document.getElementById("col-buttons").setAttribute('hidden', 'true');
+        let idBoxJogador = "player" + jogo.turno + "box";
+        var boxJogador = document.getElementById(idBoxJogador);
+        boxJogador.innerHTML = '';
+        atualizaJogo();
+        if(verificarFimJogo()){
+            if(jogo.jogadores[0].total > jogo.jogadores[1].total){
+                alert("FIM DE JOGO!\n O Jogador 0 ganhou com " + jogo.jogadores[0].total + "pontos!");
+            }
+            else{
+                alert("FIM DE JOGO!\n 1 Jogador 0 ganhou com " + jogo.jogadores[1].total + "pontos!");
+            }
+            formatarJogo();
         }
         else{
-            alert("FIM DE JOGO!\n 1 Jogador 0 ganhou com " + jogo.jogadores[1].total + "pontos!");
+            passarAVez();
         }
-        formatarJogo();
-    }
-    else{
-        passarAVez();
     }
 }
 
@@ -200,14 +212,16 @@ function atualizaJogo () {
         if(jogo.jogadores[jogo.turno].tabuleiro[i][jogo.colNumb] == 0){
             jogo.jogadores[jogo.turno].tabuleiro[i][jogo.colNumb] = jogo.valor;
             for(var j=0;j<3;j++){
-                if(jogo.jogadores[player2].tabuleiro[i][jogo.colNumb] == jogo.valor){
-                    jogo.jogadores[player2].tabuleiro[i][jogo.colNumb] = 0;
+                if(jogo.jogadores[player2].tabuleiro[j][jogo.colNumb] == jogo.valor){
+                    jogo.jogadores[player2].tabuleiro[j][jogo.colNumb] = 0;
                 }
             }
-            for(var k=2;k>0;k--){
-                if(jogo.jogadores[player2].tabuleiro[k][jogo.colNumb] == 0 && jogo.jogadores[player2].tabuleiro[k-1][jogo.colNumb] == 0){
-                    jogo.jogadores[player2].tabuleiro[k-1][jogo.colNumb] = jogo.jogadores[player2].tabuleiro[k][jogo.colNumb];
-                    jogo.jogadores[player2].tabuleiro[k][jogo.colNumb] = 0;
+            atualizaTabuleiroUsuario();
+
+            for(var k=0;k<3;k++){
+                if(jogo.jogadores[player2].tabuleiro[k][jogo.colNumb] == 0 && jogo.jogadores[player2].tabuleiro[k+1][jogo.colNumb] != 0){
+                    jogo.jogadores[player2].tabuleiro[k][jogo.colNumb] = jogo.jogadores[player2].tabuleiro[k+1][jogo.colNumb];
+                    jogo.jogadores[player2].tabuleiro[k+1][jogo.colNumb] = 0;
                 }
             }
             break;
