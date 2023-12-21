@@ -160,28 +160,32 @@ function passarAVez(){
 }
 
 function verificarFimJogo() {
-    var naoCompleto = 0;
+    var preenchido = 0;
     for(var i=0;i<3;i++){
         for(var j=0;j<3;j++){
-            if(jogo.jogadores[0].tabuleiro[i][j] == 0){
-                naoCompleto = 1;
-                break;
+            if(jogo.jogadores[0].tabuleiro[i][j] != 0){
+                preenchido += 1;
             }
         }
-    }
-    for(var i=0;i<3;i++){
-        for(var j=0;j<3;j++){
-            if(jogo.jogadores[0].tabuleiro[i][j] == 0){
-                naoCompleto++;
-                break;
-            }
-        }
-    }
-    if(naoCompleto == 2){
-        return false;
     }
 
-    return true;
+    if(preenchido == 9){
+        return true;
+    }
+    preenchido = 0;
+
+    for(var i=0;i<3;i++){
+        for(var j=0;j<3;j++){
+            if(jogo.jogadores[1].tabuleiro[i][j] == 0){
+                preenchido++;
+            }
+        }
+    }
+    if(preenchido == 9){
+        return true;
+    }
+
+    return false;
 }
 
 function atualizaJogo () {
