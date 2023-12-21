@@ -65,9 +65,7 @@ function alteraBtn(){
 
 function alteraColuna(sentido){
 
-
     var col = jogo.colNumb;
-
     if(col == 0){
         if(sentido === 'd'){
             limparColuna(col);
@@ -75,6 +73,7 @@ function alteraColuna(sentido){
             escolherColuna(jogo.colNumb);
         }
     }
+
     if(col == 1){
         if(sentido === 'e'){
             limparColuna(col);
@@ -224,15 +223,8 @@ function atualizaTabuleiroUsuario(){
         document.getElementById(id0).innerHTML = jogo.jogadores[0].pontuacao[i];
     }
 
-    for(var j=0;j>3;j++){
+    for(var j=0;j<3;j++){
         for(var k =0;k<3;k++){
-            /*
-            <div class="row">
-                      <div class="box coluna01" id="box001"></div>
-                      <div class="box coluna11" id="box011"></div>
-                      <div class="box coluna21" id="box021"></div>
-                    </div>*/
-            //linha coluna jogador
             var id = "box" + j + k + "0";
             if(jogo.jogadores[0].tabuleiro[j][k] != 0)
                 document.getElementById(id).innerHTML =  '<p class="sorted-number">' +  jogo.jogadores[0].tabuleiro[j][k] + '</p>';
@@ -247,18 +239,20 @@ function atualizaTabuleiroUsuario(){
 function calcularPontuacao(id) {
     let total = 0;
     let soma = 0;
-    for(i=0;i<3;i++){
-        for(j=0;j<3;j++){
-            soma += jogo.jogadores[id].tabuleiro[j][i] = 0;
+    for(var i=0;i<3;i++){
+        for(var k=0; k<3;k++){
+            soma += jogo.jogadores[id].tabuleiro[k][i];
         }
-        if(jogo.jogadores[id].tabuleiro[j][0] == jogo.jogadores[id].tabuleiro[j][1] 
-            || jogo.jogadores[id].tabuleiro[j][0] == jogo.jogadores[id].tabuleiro[j][2]
-            || jogo.jogadores[id].tabuleiro[j][1] == jogo.jogadores[id].tabuleiro[j][2]){
-            soma = soma * 2;
-        }
-        else if(jogo.jogadores[id].tabuleiro[j][0] == jogo.jogadores[id].tabuleiro[j][1] 
-            && jogo.jogadores[id].tabuleiro[j][0] == jogo.jogadores[id].tabuleiro[j][2]){
-            soma = soma * 3;
+        for(var j=0;j<3;j++){
+            if(jogo.jogadores[id].tabuleiro[0][j] == jogo.jogadores[id].tabuleiro[1][j] 
+                || jogo.jogadores[id].tabuleiro[0][j] == jogo.jogadores[id].tabuleiro[2][j]
+                || jogo.jogadores[id].tabuleiro[1][j] == jogo.jogadores[id].tabuleiro[2][j]){
+                soma = soma * 2;
+            }
+            else if(jogo.jogadores[id].tabuleiro[0][j] == jogo.jogadores[id].tabuleiro[1][j] 
+                && jogo.jogadores[id].tabuleiro[1][j] == jogo.jogadores[id].tabuleiro[2][j]){
+                soma = soma * 3;
+            }
         }
         jogo.jogadores[id].pontuacao[i] = soma;
         total = total + soma;
