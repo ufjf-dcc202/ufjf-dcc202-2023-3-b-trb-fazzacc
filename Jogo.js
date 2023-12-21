@@ -221,7 +221,7 @@ function atualizaJogo () {
 
 function atualizaTabuleiroUsuario(){
     for(var i=0;i<3;i++){
-        let id1 = "soma" + i + '1';
+        let id1 = "soma" + i + '1'; // i=coluna
         let id0 = "soma" + i + '0';
         document.getElementById(id1).innerHTML = jogo.jogadores[1].pontuacao[i];
         document.getElementById(id0).innerHTML = jogo.jogadores[0].pontuacao[i];
@@ -243,21 +243,25 @@ function atualizaTabuleiroUsuario(){
 function calcularPontuacao(id) {
     let total = 0;
     let soma = 0;
-    for(var i=0;i<3;i++){
-        for(var k=0; k<3;k++){
+    for(var i = 0; i < 3; i++){
+
+    }
+
+    for(var i=0;i<3;i++){ // coluna
+        for(var k=0; k<3;k++){ // 
             soma += jogo.jogadores[id].tabuleiro[k][i];
         }
-        for(var j=0;j<3;j++){
-            if(jogo.jogadores[id].tabuleiro[0][j] == jogo.jogadores[id].tabuleiro[1][j] 
-                || jogo.jogadores[id].tabuleiro[0][j] == jogo.jogadores[id].tabuleiro[2][j]
-                || jogo.jogadores[id].tabuleiro[1][j] == jogo.jogadores[id].tabuleiro[2][j]){
-                soma = soma * 2;
-            }
-            else if(jogo.jogadores[id].tabuleiro[0][j] == jogo.jogadores[id].tabuleiro[1][j] 
-                && jogo.jogadores[id].tabuleiro[1][j] == jogo.jogadores[id].tabuleiro[2][j]){
-                soma = soma * 3;
-            }
+
+        if(jogo.jogadores[id].tabuleiro[0][i] == jogo.jogadores[id].tabuleiro[1][i] 
+            || jogo.jogadores[id].tabuleiro[0][i] == jogo.jogadores[id].tabuleiro[2][i]
+            || jogo.jogadores[id].tabuleiro[1][i] == jogo.jogadores[id].tabuleiro[2][i]){
+            soma = soma * 2;
         }
+        else if(jogo.jogadores[id].tabuleiro[0][j] == jogo.jogadores[id].tabuleiro[1][j] 
+            && jogo.jogadores[id].tabuleiro[1][j] == jogo.jogadores[id].tabuleiro[2][j]){
+            soma = soma * 3;
+        }
+
         jogo.jogadores[id].pontuacao[i] = soma;
         total = total + soma;
         soma = 0;
