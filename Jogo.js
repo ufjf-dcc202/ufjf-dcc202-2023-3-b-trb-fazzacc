@@ -210,6 +210,7 @@ function atualizaJogo () {
                     jogo.jogadores[player2].tabuleiro[k][jogo.colNumb] = 0;
                 }
             }
+            break;
         }
     }
 
@@ -252,13 +253,15 @@ function calcularPontuacao(id) {
             soma += jogo.jogadores[id].tabuleiro[k][i];
         }
 
-        if(jogo.jogadores[id].tabuleiro[0][i] == jogo.jogadores[id].tabuleiro[1][i] 
+        if((jogo.jogadores[id].tabuleiro[0][i] == jogo.jogadores[id].tabuleiro[1][i] 
             || jogo.jogadores[id].tabuleiro[0][i] == jogo.jogadores[id].tabuleiro[2][i]
-            || jogo.jogadores[id].tabuleiro[1][i] == jogo.jogadores[id].tabuleiro[2][i]){
+            || jogo.jogadores[id].tabuleiro[1][i] == jogo.jogadores[id].tabuleiro[2][i])
+            && jogo.jogadores[id].tabuleiro[1][i] != 0){
             soma = soma * 2;
         }
         else if(jogo.jogadores[id].tabuleiro[0][j] == jogo.jogadores[id].tabuleiro[1][j] 
-            && jogo.jogadores[id].tabuleiro[1][j] == jogo.jogadores[id].tabuleiro[2][j]){
+            && jogo.jogadores[id].tabuleiro[1][j] == jogo.jogadores[id].tabuleiro[2][j]
+            && jogo.jogadores[id].tabuleiro[1][j] == 0){
             soma = soma * 3;
         }
 
