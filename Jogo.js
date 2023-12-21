@@ -57,10 +57,17 @@ function iniciarJogo(){
 function alteraBtn(){
     let sorteioBtnId = 'sorteio-' + jogo.turno + '-btn';
     let btnSorteio = document.getElementById(sorteioBtnId);
-    if(btnSorteio.hasAttribute('hidden'))
-        btnSorteio.removeAttribute('hidden');  
-    else
-        btnSorteio.setAttribute('hidden', 'true');
+    if(jogo.turno == 1){
+        if(btnSorteio.hasAttribute('hidden'))
+            btnSorteio.removeAttribute('hidden');  
+        else
+            btnSorteio.setAttribute('hidden', 'true');
+    }
+    if(jogo.turno == 0){
+        atualizaTabuleiroUsuario();
+        alert("vez do bot");
+        rodadaBot();
+    }
 }
 
 function alteraColuna(sentido){
@@ -104,6 +111,20 @@ function iniciarRodada () {
     document.getElementById("col-buttons").removeAttribute('hidden');
     jogo.colNumb = 0;
     escolherColuna(jogo.colNumb);  
+}
+
+function rodadaBot(){
+    jogo.valor = Math.floor((Math.random() * 6) + 1);
+    let idBoxJogador = "player0box";
+    var boxJogador = document.getElementById(idBoxJogador);
+    boxJogador.innerHTML = '<p class="sorted-number">' +  jogo.valor + '</p>';
+    // alteraBtn();
+    // document.getElementById("col-buttons").removeAttribute('hidden');
+    jogo.colNumb = Math.floor((Math.random() * 3) + 1);
+    while(verificaColunaCheia()){
+        jogo.colNumb = Math.floor((Math.random() * 3) + 1);
+    }
+    fazerJogada();
 }
 
 function escolherColuna(col){
@@ -211,6 +232,7 @@ function atualizaJogo () {
     for(var i=0;i<3;i++){
         if(jogo.jogadores[jogo.turno].tabuleiro[i][jogo.colNumb] == 0){
             jogo.jogadores[jogo.turno].tabuleiro[i][jogo.colNumb] = jogo.valor;
+            //tira o do coleguinha
             for(var j=0;j<3;j++){
                 if(jogo.jogadores[player2].tabuleiro[j][jogo.colNumb] == jogo.valor){
                     jogo.jogadores[player2].tabuleiro[j][jogo.colNumb] = 0;
@@ -218,7 +240,7 @@ function atualizaJogo () {
             }
             atualizaTabuleiroUsuario();
 
-            for(var k=0;k<3;k++){
+            for(var k=0;k<2;k++){
                 if(jogo.jogadores[player2].tabuleiro[k][jogo.colNumb] == 0 && jogo.jogadores[player2].tabuleiro[k+1][jogo.colNumb] != 0){
                     jogo.jogadores[player2].tabuleiro[k][jogo.colNumb] = jogo.jogadores[player2].tabuleiro[k+1][jogo.colNumb];
                     jogo.jogadores[player2].tabuleiro[k+1][jogo.colNumb] = 0;
