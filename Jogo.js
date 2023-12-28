@@ -65,7 +65,7 @@ function alteraBtn(){
     }
     if(jogo.turno == 0){
         atualizaTabuleiroUsuario();
-        alert("vez do bot");
+        // alert("vez do bot");
         rodadaBot();
     }
 }
@@ -114,15 +114,17 @@ function iniciarRodada () {
 }
 
 function rodadaBot(){
+    //vetor vazio, percorre a matriz procurando os lugares vazios e procura entre os //lugares vazios
+
     jogo.valor = Math.floor((Math.random() * 6) + 1);
     let idBoxJogador = "player0box";
     var boxJogador = document.getElementById(idBoxJogador);
     boxJogador.innerHTML = '<p class="sorted-number">' +  jogo.valor + '</p>';
     // alteraBtn();
     // document.getElementById("col-buttons").removeAttribute('hidden');
-    jogo.colNumb = Math.floor((Math.random() * 3) + 1);
+    jogo.colNumb = Math.floor((Math.random() * 3));
     while(verificaColunaCheia()){
-        jogo.colNumb = Math.floor((Math.random() * 3) + 1);
+        jogo.colNumb = Math.floor((Math.random() * 3));
     }
     fazerJogada();
 }
